@@ -1,13 +1,6 @@
-// Frank Poth 04/18/2018
-
-/* Changes:
-
-  1. Added the drawing calls for drawing the grass and carrots in render.
-  2. Added a p element for showing the number of carrots collected.
-
-*/
-
 window.addEventListener("load", function(event) {
+
+  console.log(getZone());
 
   "use strict";
 
