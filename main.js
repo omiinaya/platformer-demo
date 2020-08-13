@@ -1,19 +1,10 @@
-window.addEventListener("load", function(event) {
-
-  console.log(getZone());
+window.addEventListener("load", function (event) {
 
   "use strict";
 
-  //// CONSTANTS ////
+  //CLASSES
 
-  const ZONE_PREFIX = "07/zone";
-  const ZONE_SUFFIX = ".json";
-
-      /////////////////
-    //// CLASSES ////
-  /////////////////
-
-  const AssetsManager = function() {
+  const AssetsManager = function () {
 
     this.tile_set_image = undefined;
 
@@ -23,34 +14,21 @@ window.addEventListener("load", function(event) {
 
     constructor: Game.AssetsManager,
 
-    requestJSON:function(url, callback) {
+    requestZone: function (callback) {
 
-      let request = new XMLHttpRequest();
-
-      request.addEventListener("load", function(event) {
-
-        callback(JSON.parse(this.responseText));
-
-      }, { once:true });
-
-      request.open("GET", url);
-      request.send();
-
-    },
-
-    requestZone:function(callback) {
       callback(getZone())
+
     },
 
-    requestImage:function(url, callback) {
+    requestImage: function (url, callback) {
 
       let image = new Image();
 
-      image.addEventListener("load", function(event) {
+      image.addEventListener("load", function (event) {
 
         callback(image);
 
-      }, { once:true });
+      }, { once: true });
 
       image.src = url;
 
@@ -58,17 +36,16 @@ window.addEventListener("load", function(event) {
 
   };
 
-      ///////////////////
-    //// FUNCTIONS ////
-  ///////////////////
+  
+  // FUNCTIONS
 
-  var keyDownUp = function(event) {
+  var keyDownUp = function (event) {
 
     controller.keyDownUp(event.type, event.keyCode);
 
   };
 
-  var resize = function(event) {
+  var resize = function (event) {
 
     display.resize(document.documentElement.clientWidth, document.documentElement.clientHeight, game.world.height / game.world.width);
     display.render();
@@ -76,48 +53,48 @@ window.addEventListener("load", function(event) {
     var rectangle = display.context.canvas.getBoundingClientRect();
 
     p.style.left = rectangle.left + "px";
-    p.style.top  = rectangle.top + "px";
+    p.style.top = rectangle.top + "px";
     p.style.fontSize = game.world.tile_set.tile_size * rectangle.height / game.world.height + "px";
 
   };
 
-  var render = function() {
+  var render = function () {
 
     var frame = undefined;
 
-    display.drawMap   (assets_manager.tile_set_image,
-    game.world.tile_set.columns, game.world.graphical_map, game.world.columns,  game.world.tile_set.tile_size);
+    display.drawMap(assets_manager.tile_set_image,
+      game.world.tile_set.columns, game.world.graphical_map, game.world.columns, game.world.tile_set.tile_size);
 
-    for (let index = game.world.carrots.length - 1; index > -1; -- index) {
+    for (let index = game.world.carrots.length - 1; index > -1; --index) {
 
       let carrot = game.world.carrots[index];
 
       frame = game.world.tile_set.frames[carrot.frame_value];
 
       display.drawObject(assets_manager.tile_set_image,
-      frame.x, frame.y,
-      carrot.x + Math.floor(carrot.width * 0.5 - frame.width * 0.5) + frame.offset_x,
-      carrot.y + frame.offset_y, frame.width, frame.height);
+        frame.x, frame.y,
+        carrot.x + Math.floor(carrot.width * 0.5 - frame.width * 0.5) + frame.offset_x,
+        carrot.y + frame.offset_y, frame.width, frame.height);
 
     }
 
     frame = game.world.tile_set.frames[game.world.player.frame_value];
 
     display.drawObject(assets_manager.tile_set_image,
-    frame.x, frame.y,
-    game.world.player.x + Math.floor(game.world.player.width * 0.5 - frame.width * 0.5) + frame.offset_x,
-    game.world.player.y + frame.offset_y, frame.width, frame.height);
+      frame.x, frame.y,
+      game.world.player.x + Math.floor(game.world.player.width * 0.5 - frame.width * 0.5) + frame.offset_x,
+      game.world.player.y + frame.offset_y, frame.width, frame.height);
 
-    for (let index = game.world.grass.length - 1; index > -1; -- index) {
+    for (let index = game.world.grass.length - 1; index > -1; --index) {
 
       let grass = game.world.grass[index];
 
       frame = game.world.tile_set.frames[grass.frame_value];
 
       display.drawObject(assets_manager.tile_set_image,
-      frame.x, frame.y,
-      grass.x + frame.offset_x,
-      grass.y + frame.offset_y, frame.width, frame.height);
+        frame.x, frame.y,
+        grass.x + frame.offset_x,
+        grass.y + frame.offset_y, frame.width, frame.height);
 
     }
 
@@ -127,11 +104,11 @@ window.addEventListener("load", function(event) {
 
   };
 
-  var update = function() {
+  var update = function () {
 
-    if (controller.left.active ) { game.world.player.moveLeft ();                               }
-    if (controller.right.active) { game.world.player.moveRight();                               }
-    if (controller.up.active   ) { game.world.player.jump();      controller.up.active = false; }
+    if (controller.left.active) { game.world.player.moveLeft(); }
+    if (controller.right.active) { game.world.player.moveRight(); }
+    if (controller.up.active) { game.world.player.jump(); controller.up.active = false; }
 
     game.update();
 
@@ -139,7 +116,8 @@ window.addEventListener("load", function(event) {
 
       engine.stop();
 
-      assets_manager.requestJSON(ZONE_PREFIX + game.world.door.destination_zone + ZONE_SUFFIX, (zone) => {
+      //assets_manager.requestJSON(ZONE_PREFIX + game.world.door.destination_zone + ZONE_SUFFIX, (zone) => {
+      assets_manager.requestZone((zone) => {
 
         game.world.setup(zone);
 
@@ -153,30 +131,24 @@ window.addEventListener("load", function(event) {
 
   };
 
-      /////////////////
-    //// OBJECTS ////
-  /////////////////
+  // OBJECTS
 
   var assets_manager = new AssetsManager();
-  var controller     = new Controller();
-  var display        = new Display(document.querySelector("canvas"));
-  var game           = new Game();
-  var engine         = new Engine(1000/30, render, update);
+  var controller = new Controller();
+  var display = new Display(document.querySelector("canvas"));
+  var game = new Game();
+  var engine = new Engine(1000 / 30, render, update);
 
-  var p              = document.createElement("p");
+  var p = document.createElement("p");
   p.setAttribute("style", "color:#c07000; font-size:2.0em; position:fixed;");
   p.innerHTML = "Carrots: 0";
   document.body.appendChild(p);
 
-      ////////////////////
-    //// INITIALIZE ////
-  ////////////////////
+  // INITIALIZE
 
   display.buffer.canvas.height = game.world.height;
-  display.buffer.canvas.width  = game.world.width;
+  display.buffer.canvas.width = game.world.width;
   display.buffer.imageSmoothingEnabled = false;
-
-  var zone = getZone();
 
   assets_manager.requestZone((zone) => {
 
@@ -194,7 +166,7 @@ window.addEventListener("load", function(event) {
   });
 
   window.addEventListener("keydown", keyDownUp);
-  window.addEventListener("keyup"  , keyDownUp);
-  window.addEventListener("resize" , resize);
+  window.addEventListener("keyup", keyDownUp);
+  window.addEventListener("resize", resize);
 
 });
