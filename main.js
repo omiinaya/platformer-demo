@@ -52,10 +52,6 @@ window.addEventListener("load", function (event) {
 
     var rectangle = display.context.canvas.getBoundingClientRect();
 
-    p.style.left = rectangle.left + "px";
-    p.style.top = rectangle.top + "px";
-    p.style.fontSize = game.world.tile_set.tile_size * rectangle.height / game.world.height + "px";
-
   };
 
   var render = function () {
@@ -98,8 +94,6 @@ window.addEventListener("load", function (event) {
 
     }
 
-    p.innerHTML = "Carrots: " + game.world.carrot_count;
-
     display.render();
 
   };
@@ -139,10 +133,6 @@ window.addEventListener("load", function (event) {
   var game = new Game();
   var engine = new Engine(1000 / 60, render, update);
 
-  var p = document.createElement("p");
-  p.setAttribute("style", "color:#c07000; font-size:2.0em; position:fixed;");
-  p.innerHTML = "Carrots: 0";
-  document.body.appendChild(p);
 
   // INITIALIZE
 
