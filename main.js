@@ -1,4 +1,6 @@
 window.addEventListener("load", function (event) {
+  
+  console.log(getAllZones());
 
   "use strict";
 
@@ -150,7 +152,7 @@ window.addEventListener("load", function (event) {
   display.buffer.canvas.width = game.world.width;
   display.buffer.imageSmoothingEnabled = false;
 
-  assets_manager.requestZone(0, (zone) => {
+  assets_manager.requestZone(1, (zone) => {
 
     game.world.setup(zone);
 
