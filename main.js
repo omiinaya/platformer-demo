@@ -38,6 +38,10 @@ window.addEventListener("load", function(event) {
 
     },
 
+    requestZone:function(callback) {
+      callback(getZone())
+    },
+
     requestImage:function(url, callback) {
 
       let image = new Image();
@@ -172,7 +176,9 @@ window.addEventListener("load", function(event) {
   display.buffer.canvas.width  = game.world.width;
   display.buffer.imageSmoothingEnabled = false;
 
-  assets_manager.requestJSON(ZONE_PREFIX + game.world.zone_id + ZONE_SUFFIX, (zone) => {
+  var zone = getZone();
+
+  assets_manager.requestZone((zone) => {
 
     game.world.setup(zone);
 
