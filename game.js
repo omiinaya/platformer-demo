@@ -364,7 +364,7 @@ Game.Player.prototype = {
     if (!this.jumping && this.velocity_y < 10) {
 
       this.jumping     = true;
-      this.velocity_y -= 11;
+      this.velocity_y -= 6;
 
     }
 
@@ -452,18 +452,18 @@ Game.TileSet = function(columns, tile_size) {
 };
 Game.TileSet.prototype = { constructor: Game.TileSet };
 
-Game.World = function(friction = 0.85, gravity = 1.5) {
+Game.World = function(friction = 0.75, gravity = 0.5) {
 
   this.collider     = new Game.Collider();
 
   this.friction     = friction;
   this.gravity      = gravity;
 
-  this.columns      = 12;
+  this.columns      = 14;
   this.rows         = 9;
 
   this.tile_set     = new Game.TileSet(8, 16);
-  this.player       = new Game.Player(32, 76);
+  this.player       = new Game.Player(32, 116);
 
   this.zone_id      = "00";
 

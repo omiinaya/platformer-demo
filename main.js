@@ -1,6 +1,4 @@
 window.addEventListener("load", function (event) {
-  
-  console.log(getAllZones());
 
   "use strict";
 
@@ -139,7 +137,7 @@ window.addEventListener("load", function (event) {
   var controller = new Controller();
   var display = new Display(document.querySelector("canvas"));
   var game = new Game();
-  var engine = new Engine(1000 / 30, render, update);
+  var engine = new Engine(1000 / 60, render, update);
 
   var p = document.createElement("p");
   p.setAttribute("style", "color:#c07000; font-size:2.0em; position:fixed;");
@@ -152,8 +150,7 @@ window.addEventListener("load", function (event) {
   display.buffer.canvas.width = game.world.width;
   display.buffer.imageSmoothingEnabled = false;
 
-  assets_manager.requestZone(1, (zone) => {
-
+  assets_manager.requestZone(0, (zone) => {
     game.world.setup(zone);
 
     assets_manager.requestImage("platformer-demo.png", (image) => {
