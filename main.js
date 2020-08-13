@@ -154,7 +154,7 @@ window.addEventListener("load", function (event) {
 
     game.world.setup(zone);
 
-    assets_manager.requestImage("rabbit-trap.png", (image) => {
+    assets_manager.requestImage("platformer-demo.png", (image) => {
 
       assets_manager.tile_set_image = image;
 
