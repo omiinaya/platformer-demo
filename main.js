@@ -14,9 +14,9 @@ window.addEventListener("load", function (event) {
 
     constructor: Game.AssetsManager,
 
-    requestZone: function (callback) {
+    requestZone: function (id, callback) {
 
-      callback(getZone())
+      callback(getZone(id))
 
     },
 
@@ -150,7 +150,7 @@ window.addEventListener("load", function (event) {
   display.buffer.canvas.width = game.world.width;
   display.buffer.imageSmoothingEnabled = false;
 
-  assets_manager.requestZone((zone) => {
+  assets_manager.requestZone(0, (zone) => {
 
     game.world.setup(zone);
 

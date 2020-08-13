@@ -364,7 +364,7 @@ Game.Player.prototype = {
     if (!this.jumping && this.velocity_y < 10) {
 
       this.jumping     = true;
-      this.velocity_y -= 13;
+      this.velocity_y -= 11;
 
     }
 
@@ -452,7 +452,7 @@ Game.TileSet = function(columns, tile_size) {
 };
 Game.TileSet.prototype = { constructor: Game.TileSet };
 
-Game.World = function(friction = 0.85, gravity = 2) {
+Game.World = function(friction = 0.85, gravity = 1.5) {
 
   this.collider     = new Game.Collider();
 
