@@ -103,6 +103,8 @@ window.addEventListener("load", function (event) {
     if (controller.left.active) { game.world.player.moveLeft(); }
     if (controller.right.active) { game.world.player.moveRight(); }
     if (controller.up.active) { game.world.player.jump(); controller.up.active = false; }
+    if (controller.space.active) { game.world.player.test(); controller.space.active = false; }
+    if (controller.shift.active) { game.world.player.dash(); controller.space.active = false; }
 
     game.update();
 
@@ -130,6 +132,7 @@ window.addEventListener("load", function (event) {
   var assets_manager = new AssetsManager();
   var controller = new Controller();
   var display = new Display(document.querySelector("canvas"));
+  var viewport = new Viewport(200, 200, 300, 300);
   var game = new Game();
   var engine = new Engine(1000 / 60, render, update);
 
@@ -140,7 +143,7 @@ window.addEventListener("load", function (event) {
   display.buffer.canvas.width = game.world.width;
   display.buffer.imageSmoothingEnabled = false;
 
-  assets_manager.requestZone(0, (zone) => {
+  assets_manager.requestZone(1, (zone) => {
     game.world.setup(zone);
 
     assets_manager.requestImage("platformer-demo.png", (image) => {

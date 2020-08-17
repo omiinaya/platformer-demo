@@ -1,3 +1,25 @@
+//here for testing. will be moved to zone js later.
+var scaled_size = 16;
+var sprite_size = 16;
+
+const Viewport = function(x, y, w, h) {
+
+  this.x = x;
+  this.y = y;
+  this.w = w;
+  this.h = h;
+
+};
+
+Viewport.prototype = {
+  
+  scrollTo:function(x,y) {
+    this.x = x - this.w * 0.5;
+    this.y = y - this.w * 0.5;
+  }
+
+};
+
 const Display = function(canvas) {
 
   this.buffer  = document.createElement("canvas").getContext("2d"),
@@ -6,13 +28,13 @@ const Display = function(canvas) {
   /* This function draws the map to the buffer. */
   this.drawMap = function(image, image_columns, map, map_columns, tile_size) {
 
-    for (let index = map.length - 1; index > -1; -- index) {
+    for (let i = map.length - 1; i > -1; -- i) {
 
-      let value         = map[index];
+      let value         = map[i];
       let source_x      =           (value % image_columns) * tile_size;
       let source_y      = Math.floor(value / image_columns) * tile_size;
-      let destination_x =           (index % map_columns  ) * tile_size;
-      let destination_y = Math.floor(index / map_columns  ) * tile_size;
+      let destination_x =           (i % map_columns  ) * tile_size;
+      let destination_y = Math.floor(i / map_columns  ) * tile_size;
 
       this.buffer.drawImage(image, source_x, source_y, tile_size, tile_size, destination_x, destination_y, tile_size, tile_size);
 
