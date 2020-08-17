@@ -36,7 +36,7 @@ window.addEventListener("load", function (event) {
 
   };
 
-  
+
   // FUNCTIONS
 
   var keyDownUp = function (event) {
@@ -94,7 +94,12 @@ window.addEventListener("load", function (event) {
 
     }
 
+    //var player = getPlayer();
+    //viewport.scrollTo(player.x, player.y);
+    //console.log(viewport);
+
     display.render();
+    //viewport.render();
 
   };
 
@@ -102,7 +107,7 @@ window.addEventListener("load", function (event) {
 
     if (controller.left.active) { game.world.player.moveLeft(); }
     if (controller.right.active) { game.world.player.moveRight(); }
-    if (controller.up.active) { game.world.player.jump(); controller.up.active = false; }
+    if (controller.up.active) { game.world.player.jump(); controller.up.active = false; console.log(viewport); }
     if (controller.space.active) { game.world.player.jump(); controller.space.active = false; }
     if (controller.shift.active) { game.world.player.dash(); controller.space.active = false; }
 
