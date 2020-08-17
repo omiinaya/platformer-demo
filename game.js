@@ -1,3 +1,9 @@
+var currentPlayer;
+
+function getPlayer() {
+  return currentPlayer;
+}
+
 const Game = function () {
 
   this.world = new Game.World();
@@ -340,10 +346,11 @@ Game.Player = function (x, y) {
 
   Game.Animator.call(this, Game.Player.prototype.frame_sets["idle-right"], 10);
 
-  this.jumping = false;
   this.direction_x = 1;
   this.velocity_x = 0;
   this.velocity_y = 0;
+
+  currentPlayer = this;
 
 };
 
