@@ -385,9 +385,15 @@ Game.Player.prototype = {
   },
 
   dash: function () {
-    if (!this.dashing) {
+    var player = this;
+    console.log(player.direction_x);
+
+    if (this.direction_x == 1) {
       this.dashing = true;
-      this.velocity_x += 15;
+      this.velocity_x += 2;
+    } else {
+      this.dashing = true;
+      this.velocity_x -= 2;
     }
   },
 

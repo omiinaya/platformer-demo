@@ -14,13 +14,13 @@ const Controller = function() {
       //wasd
       case 65: this.left.getInput(down); break;
       case 68: this.right.getInput(down); break;
-      case 87: this.up.getInput(down); break;
+      case 32: this.up.getInput(down); break;
       //arrow keys
       case 37: this.left.getInput(down);  break;
       case 38: this.up.getInput(down);    break;
       case 39: this.right.getInput(down); break;
       //others
-      case 32: this.space.getInput(down); break;
+      case 32: this.space.getInput(down); break
       case 16: this.shift.getInput(down);
 
     }
