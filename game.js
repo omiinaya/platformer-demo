@@ -338,10 +338,10 @@ Game.Player = function (x, y) {
 
   Game.MovingObject.call(this, x, y, 7, 12);
 
-  Game.Animator.call(this, Game.Player.prototype.frame_sets["idle-left"], 10);
+  Game.Animator.call(this, Game.Player.prototype.frame_sets["idle-right"], 10);
 
-  this.jumping = true;
-  this.direction_x = -1;
+  this.jumping = false;
+  this.direction_x = 1;
   this.velocity_x = 0;
   this.velocity_y = 0;
 
