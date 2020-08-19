@@ -367,26 +367,29 @@ Game.Player.prototype = {
 
   },
 
+  //a = abilities, ms = time in milliseconds.
   cooldown: function (a, ms) {
     var player = this;
-    console.log(player);
     player[a] = true;
     if (player[a] == true) {
       setTimeout(function () {
         player[a] = false;
-        console.log(player);
-        console.log(player[a]);
       }, ms);
     }
   },
 
   dash: function () {
     if (this.dashing == false) {
+
+      //if facing right...
       if (this.direction_x == 1) {
         this.velocity_x += 15;
-      } else {
+      } 
+      //if not facing right... in other words, if facing left...
+      else {
         this.velocity_x -= 15;
       }
+
       this.cooldown('dashing', 1000)
     }
   },
@@ -399,7 +402,6 @@ Game.Player.prototype = {
       this.jumping = true;
       this.velocity_y -= 5.5;
       console.log(this.y);
-      console.log(this.dashing);
 
     }
 

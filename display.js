@@ -1,6 +1,3 @@
-var scaled_size = 16;
-var sprite_size = 16;
-
 const Viewport = function (x, y, w, h) {
 
   this.x = x;
@@ -18,45 +15,8 @@ const Viewport = function (x, y, w, h) {
 
   this.context.imageSmoothingEnabled = false;
 
-  /* Get the min and max column and row in the map to draw. For the min
-  column and row (x and y) we use floor to round down and for the max we
-  use ceil to round up. We want to get the rows and columns under the borders
-  of the viewport rectangle. This is visualized by the white square in the example. */
-  var x_min = Math.floor(this.x / scaled_size);
-  var y_min = Math.floor(this.y / scaled_size);
-  var x_max = Math.ceil((this.x + this.w) / scaled_size);
-  var y_max = Math.ceil((this.y + this.h) / scaled_size);
-
-  /* the min and max column and row values cannot go beyond the boundaries
-  of the map. Those values are 0 and the number of columns and rows in the map. */
-
-
-  /* Now we loop through the tiles in the map, but only between the min
-  and max columns and rows that the viewport is over. To do this we use two
-  for loops, one for the columns (x) and one for the rows (y) of the map. */
-
-  this.drawMap = function (image, columns, map, columns, tile_size) {
-
-    if (x_min < 0) x_min = 0;
-    if (y_min < 0) y_min = 0;
-    if (x_max > columns) x_max = columns;
-    if (y_max > rows) y_max = rows;
-
-    for (let x = x_min; x < x_max; x++) {
-
-      for (let y = y_min; y < y_max; y++) {
-
-        let value = map[y * columns + x];// Tile value
-        let source_x = Math.floor(x * tile_size - this.x + width * 0.5 - this.w * 0.5);// Tile x destination for drawing
-        let source_y = Math.floor(y * tile_size - this.y + height * 0.5 - this.h * 0.5);// Tile y destination for drawing
-
-        // Draw tile from tile_sheet
-        context.drawImage(image, value * sprite_size, 0, sprite_size, sprite_size, source_x, source_y, tile_size, tile_size);
-
-      }
-    }
-  }
 };
+
 
 Viewport.prototype = {
 
@@ -66,7 +26,8 @@ Viewport.prototype = {
   },
 
   render: function () {
-    this.context.drawImage(this.context.canvas, 0, 0, this.context.canvas.width, this.context.canvas.height, 0, 0, this.context.canvas.width, this.context.canvas.height);
+    this.context.fillStyle = '#008000';
+    this.context.fillRect(0, 0, this.width, this.height);
   },
 
 };
