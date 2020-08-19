@@ -19,6 +19,41 @@ const Viewport = function (x, y, w, h) {
 
   this.context.imageSmoothingEnabled = false;
 
+  //drawmap needs to receive tilesheet, columns, rows, sprite size and scaled size.
+  this.drawMap = function(tile_sheet, columns, rows, sprite_size, scaled_size) {
+
+    var x_min = Math.floor(viewport.x / scaled_size);
+    var y_min = Math.floor(viewport.y / scaled_size);
+    var x_max = Math.ceil((viewport.x + viewport.w) / scaled_size);
+    var y_max = Math.ceil((viewport.y + viewport.h) / scaled_size);
+
+    /* the min and max column and row values cannot go beyond the boundaries
+    of the map. Those values are 0 and the number of columns and rows in the map. */
+    if (x_min < 0) x_min = 0;
+    if (y_min < 0) y_min = 0;
+    if (x_max > columns) x_max = columns;
+    if (y_max > rows) y_max = rows;
+
+    /* Now we loop through the tiles in the map, but only between the min
+    and max columns and rows that the viewport is over. To do this we use two
+    for loops, one for the columns (x) and one for the rows (y) of the map. */
+    for (let x = x_min; x < x_max; x ++) {
+
+      for (let y = y_min; y < y_max; y ++) {
+
+        let value = map[y * columns + x];// Tile value
+        let tile_x = Math.floor(x * scaled_size - viewport.x + width * 0.5 - viewport.w * 0.5);// Tile x destination for drawing
+        let tile_y = Math.floor(y * scaled_size - viewport.y + height * 0.5 - viewport.h * 0.5);// Tile y destination for drawing
+
+        // Draw tile from tile_sheet
+        context.drawImage(tile_sheet, value * sprite_size, 0, sprite_size, sprite_size, tile_x, tile_y, scaled_size, scaled_size);
+
+      }
+
+    }
+
+  }
+
 };
 
 

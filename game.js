@@ -485,10 +485,11 @@ Object.assign(Game.Player.prototype, Game.MovingObject.prototype);
 Object.assign(Game.Player.prototype, Game.Animator.prototype);
 Game.Player.prototype.constructor = Game.Player;
 
-Game.TileSet = function (columns, tile_size) {
+Game.TileSet = function (columns, tile_size, tile_scale) {
 
   this.columns = columns;
   this.tile_size = tile_size;
+  this.tile_scale = 16;
 
   let f = Game.Frame;
 

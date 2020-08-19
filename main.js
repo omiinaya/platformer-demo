@@ -56,9 +56,9 @@ window.addEventListener("load", function (event) {
   var resize = function (event) {
 
     //display.resize(document.documentElement.clientWidth, document.documentElement.clientHeight, game.world.height / game.world.width);
-    viewport.resize(document.documentElement.clientWidth, document.documentElement.clientHeight, game.world.height / game.world.width);
+    display.resize(document.documentElement.clientWidth, document.documentElement.clientHeight, game.world.height / game.world.width);
     //display.render();
-    viewport.render();
+    display.render();
 
     var rectangle = display.context.canvas.getBoundingClientRect();
 
@@ -73,7 +73,7 @@ window.addEventListener("load", function (event) {
       game.world.tile_set.columns, game.world.graphical_map, game.world.columns, game.world.tile_set.tile_size);
 
     viewport.drawMap(assets_manager.tile_set_image,
-      game.world.tile_set.columns, game.world.graphical_map, game.world.columns, game.world.tile_set.tile_size);
+      game.world.tile_set.columns, game.world.tile_set.tile_size, game.world.tile_set.scaled_size);
 
     for (let index = game.world.carrots.length - 1; index > -1; --index) {
 
@@ -95,10 +95,10 @@ window.addEventListener("load", function (event) {
       game.world.player.x + Math.floor(game.world.player.width * 0.5 - frame.width * 0.5) + frame.offset_x,
       game.world.player.y + frame.offset_y, frame.width, frame.height);
 
-    viewport.drawObject(assets_manager.tile_set_image,
-      frame.x, frame.y,
-      game.world.player.x + Math.floor(game.world.player.width * 0.5 - frame.width * 0.5) + frame.offset_x,
-      game.world.player.y + frame.offset_y, frame.width, frame.height);
+    //viewport.drawObject(assets_manager.tile_set_image,
+      //frame.x, frame.y,
+      //game.world.player.x + Math.floor(game.world.player.width * 0.5 - frame.width * 0.5) + frame.offset_x,
+      //game.world.player.y + frame.offset_y, frame.width, frame.height);
 
     for (let index = game.world.grass.length - 1; index > -1; --index) {
 
