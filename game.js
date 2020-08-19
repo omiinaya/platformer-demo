@@ -367,8 +367,28 @@ Game.Player.prototype = {
 
   },
 
-  test: function () {
-    console.log(this.x);
+  cooldown: function () {
+    var player = this;
+    console.log(player);
+    player.dashing = true;
+    if (player.dashing == true) {
+      setTimeout(function () {
+        player.dashing = false;
+        console.log(player);
+        console.log(player.dashing);
+      }, 1000);
+    }
+  },
+
+  dash: function () {
+    if (this.dashing == false) {
+      if (this.direction_x == 1) {
+        this.velocity_x += 15;
+      } else {
+        this.velocity_x -= 15;
+      }
+      this.cooldown()
+    }
   },
 
   jump: function () {
@@ -379,6 +399,7 @@ Game.Player.prototype = {
       this.jumping = true;
       this.velocity_y -= 5.5;
       console.log(this.y);
+      console.log(this.dashing);
 
     }
 
@@ -388,19 +409,6 @@ Game.Player.prototype = {
     if (!this.dashing) {
       this.dashing = true;
       this.x += 15;
-    }
-  },
-
-  dash: function () {
-    var player = this;
-    console.log(player.direction_x);
-
-    if (this.direction_x == 1) {
-      this.dashing = true;
-      this.velocity_x += 2;
-    } else {
-      this.dashing = true;
-      this.velocity_x -= 2;
     }
   },
 
