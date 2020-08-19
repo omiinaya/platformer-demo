@@ -3,7 +3,7 @@ var currentImage;
 
 //global functions
 function getImage() {
-  console.log(currentImage);
+  return currentImage;
 }
 
 window.addEventListener("load", function (event) {
@@ -55,8 +55,10 @@ window.addEventListener("load", function (event) {
 
   var resize = function (event) {
 
-    display.resize(document.documentElement.clientWidth, document.documentElement.clientHeight, game.world.height / game.world.width);
-    display.render();
+    //display.resize(document.documentElement.clientWidth, document.documentElement.clientHeight, game.world.height / game.world.width);
+    viewport.resize(document.documentElement.clientWidth, document.documentElement.clientHeight, game.world.height / game.world.width);
+    //display.render();
+    viewport.render();
 
     var rectangle = display.context.canvas.getBoundingClientRect();
 
@@ -68,6 +70,9 @@ window.addEventListener("load", function (event) {
 
     //calls function drawmap from display then passes loaded image
     display.drawMap(assets_manager.tile_set_image,
+      game.world.tile_set.columns, game.world.graphical_map, game.world.columns, game.world.tile_set.tile_size);
+
+    viewport.drawMap(assets_manager.tile_set_image,
       game.world.tile_set.columns, game.world.graphical_map, game.world.columns, game.world.tile_set.tile_size);
 
     for (let index = game.world.carrots.length - 1; index > -1; --index) {
@@ -90,6 +95,11 @@ window.addEventListener("load", function (event) {
       game.world.player.x + Math.floor(game.world.player.width * 0.5 - frame.width * 0.5) + frame.offset_x,
       game.world.player.y + frame.offset_y, frame.width, frame.height);
 
+    viewport.drawObject(assets_manager.tile_set_image,
+      frame.x, frame.y,
+      game.world.player.x + Math.floor(game.world.player.width * 0.5 - frame.width * 0.5) + frame.offset_x,
+      game.world.player.y + frame.offset_y, frame.width, frame.height);
+
     for (let index = game.world.grass.length - 1; index > -1; --index) {
 
       let grass = game.world.grass[index];
@@ -107,8 +117,8 @@ window.addEventListener("load", function (event) {
     viewport.scrollTo(player.x, player.y);
     //console.log(viewport);
 
-    //display.render();
-    viewport.render();
+    display.render();
+    //viewport.render();
 
   };
 
