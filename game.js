@@ -367,16 +367,16 @@ Game.Player.prototype = {
 
   },
 
-  cooldown: function () {
+  cooldown: function (a, ms) {
     var player = this;
     console.log(player);
-    player.dashing = true;
-    if (player.dashing == true) {
+    player[a] = true;
+    if (player[a] == true) {
       setTimeout(function () {
-        player.dashing = false;
+        player[a] = false;
         console.log(player);
-        console.log(player.dashing);
-      }, 1000);
+        console.log(player[a]);
+      }, ms);
     }
   },
 
@@ -387,7 +387,7 @@ Game.Player.prototype = {
       } else {
         this.velocity_x -= 15;
       }
-      this.cooldown()
+      this.cooldown('dashing', 1000)
     }
   },
 
