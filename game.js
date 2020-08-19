@@ -1,9 +1,17 @@
+//global vars
 var currentPlayer;
+var currentWorld;
+
+//global functions
+function getWorld() {
+  console.log(currentWorld);
+}
 
 function getPlayer() {
   return currentPlayer;
 }
 
+//classes
 const Game = function () {
 
   this.world = new Game.World();
@@ -507,6 +515,7 @@ Game.World = function (friction = 0.68, gravity = 0.4) {
   this.columns = 12;
   this.rows = 9;
 
+  //8 columns, size 16
   this.tile_set = new Game.TileSet(8, 16);
   this.player = new Game.Player(32, 116);
 
@@ -520,6 +529,7 @@ Game.World = function (friction = 0.68, gravity = 0.4) {
   this.height = this.tile_set.tile_size * this.rows;
   this.width = this.tile_set.tile_size * this.columns;
 
+  currentWorld = this;
 };
 Game.World.prototype = {
 

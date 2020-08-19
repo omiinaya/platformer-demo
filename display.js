@@ -1,3 +1,8 @@
+//global vars
+var image = getImage();
+var sprite_size = 16;
+var scaled_size = 16;
+
 const Viewport = function (x, y, w, h) {
 
   this.x = x;
@@ -85,6 +90,7 @@ Display.prototype = {
   constructor: Display,
 
   render: function () {
+    //passes canvas, x, y, canvas.width, canvas.height, 0, 0, 
     this.context.drawImage(this.buffer.canvas, 0, 0, this.buffer.canvas.width, this.buffer.canvas.height, 0, 0, this.context.canvas.width, this.context.canvas.height);
   },
 

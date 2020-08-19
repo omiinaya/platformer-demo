@@ -1,3 +1,11 @@
+//global vars
+var currentImage;
+
+//global functions
+function getImage() {
+  console.log(currentImage);
+}
+
 window.addEventListener("load", function (event) {
 
   "use strict";
@@ -58,6 +66,7 @@ window.addEventListener("load", function (event) {
 
     var frame = undefined;
 
+    //calls function drawmap from display then passes loaded image
     display.drawMap(assets_manager.tile_set_image,
       game.world.tile_set.columns, game.world.graphical_map, game.world.columns, game.world.tile_set.tile_size);
 
@@ -94,12 +103,12 @@ window.addEventListener("load", function (event) {
 
     }
 
-    //var player = getPlayer();
-    //viewport.scrollTo(player.x, player.y);
+    var player = getPlayer();
+    viewport.scrollTo(player.x, player.y);
     //console.log(viewport);
 
-    display.render();
-    //viewport.render();
+    //display.render();
+    viewport.render();
 
   };
 
@@ -154,6 +163,7 @@ window.addEventListener("load", function (event) {
     assets_manager.requestImage("platformer-demo.png", (image) => {
 
       assets_manager.tile_set_image = image;
+      currentImage = image;
 
       resize();
       engine.start();
