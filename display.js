@@ -19,47 +19,6 @@ const Viewport = function (x, y, w, h) {
 
   this.context.imageSmoothingEnabled = false;
 
-  this.drawMap = function (image, image_columns, map, map_columns, tile_size) {
-
-    for (let i = map.length - 1; i > -1; --i) {
-
-      let value = map[i];
-      let source_x = (value % image_columns) * tile_size;
-      let source_y = Math.floor(value / image_columns) * tile_size;
-      let destination_x = (i % map_columns) * tile_size;
-      let destination_y = Math.floor(i / map_columns) * tile_size;
-
-      this.context.drawImage(image, source_x, source_y, tile_size, tile_size, destination_x, destination_y, tile_size, tile_size);
-
-    }
-
-  };
-
-  this.drawObject = function (image, source_x, source_y, destination_x, destination_y, width, height) {
-
-    this.context.drawImage(image, source_x, source_y, width, height, Math.round(destination_x), Math.round(destination_y), width, height);
-
-  };
-
-  this.resize = function (width, height, height_width_ratio) {
-
-    if (height / width > height_width_ratio) {
-
-      this.context.canvas.height = width * height_width_ratio;
-      this.context.canvas.width = width;
-
-    } else {
-
-      this.context.canvas.height = height;
-      this.context.canvas.width = height / height_width_ratio;
-
-    }
-
-    this.context.imageSmoothingEnabled = false;
-
-  };
-
-
 };
 
 
@@ -73,9 +32,6 @@ Viewport.prototype = {
   render: function () {
     //this.context.fillStyle = '#008000';
     //this.context.fillRect(0, 0, this.width, this.height);
-    this.context.strokeStyle = "#ffffff";
-    //this.context.rect(this.width * 0.5 - viewport.w * 0.5, this.height * 0.5 - viewport.h * 0.5, viewport.w, viewport.h);
-    this.context.stroke();
 
   },
 
