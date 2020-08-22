@@ -167,7 +167,7 @@ window.addEventListener("load", function (event) {
   display.buffer.canvas.width = game.world.width;
   display.buffer.imageSmoothingEnabled = false;
 
-  assets_manager.requestZone(1, (zone) => {
+  assets_manager.requestZone(0, (zone) => {
     game.world.setup(zone);
 
     assets_manager.requestImage("platformer-demo.png", (image) => {
