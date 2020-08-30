@@ -136,7 +136,6 @@ window.addEventListener("load", function (event) {
 
       engine.stop();
 
-      //assets_manager.requestJSON(ZONE_PREFIX + game.world.door.destination_zone + ZONE_SUFFIX, (zone) => {
       assets_manager.requestZone((zone) => {
 
         game.world.setup(zone);
